@@ -32,9 +32,9 @@ const CommandCenter = ({ convert }) => {
       {
         type: actions.CHANGED_NUMERAL_INPUT,
         payload: {
-          input: e.target.value,
+          toTransform: e.target.value,
           transformed,
-          error: error
+          error
         }
       })
   }
@@ -46,9 +46,9 @@ const CommandCenter = ({ convert }) => {
       {
         type: actions.TOGGLE,
         payload: {
-          input: toTransform,
+          toTransform,
           transformed,
-          error: error
+          error
         }
       })
   }

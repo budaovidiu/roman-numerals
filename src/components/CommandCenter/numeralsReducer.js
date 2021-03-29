@@ -15,13 +15,13 @@ export const numeralsReducer = (state, action) => {
     case actions.CHANGED_NUMERAL_INPUT:
       return {
         ...state,
-        toTransform: action.payload.input,
+        toTransform: action.payload.toTransform,
         transformed: action.payload.transformed,
         error: action.payload.error,
       }
     case actions.TOGGLE:
       const newState = {
-        toTransform: action.payload.input,
+        toTransform: action.payload.toTransform,
         transformed: action.payload.transformed,
         error: action.payload.error,
         isRoman: !state.isRoman
