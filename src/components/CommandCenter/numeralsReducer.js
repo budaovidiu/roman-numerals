@@ -11,7 +11,6 @@ export const actions = {
 }
 
 export const numeralsReducer = (state, action) => {
-  console.log(action)
   switch (action.type) {
     case actions.CHANGED_NUMERAL_INPUT:
       return {
