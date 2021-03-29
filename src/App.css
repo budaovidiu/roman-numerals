@@ -39,6 +39,11 @@
   padding-left: 10px;
   background-color: #C25834; color: #FFFFFF;
 }
+input:disabled[type=checkbox] + .onoffswitch-inner:before {
+  content: "XVI";
+  padding-left: 10px;
+  background-color: #999999; color: #FFFFFF;
+}
 .onoffswitch-inner:after {
   content: "123";
   padding-right: 10px;

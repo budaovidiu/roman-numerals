@@ -11,33 +11,46 @@ const CommandCenter = ({ convert }) => {
     convert({ error, transformed })
   }, [state])
 
-  const handleInputChange = (e) => {
-    try {
-      const transformed = state.isRoman ? RomanNumerals.fromRoman(e.target.value) : RomanNumerals.toRoman(e.target.value)
-      dispatch(
-        {
-          type: actions.CHANGED_NUMERAL_INPUT,
-          payload: {
-            input: e.target.value,
-            transformed,
-            error: undefined
-          }
-        })
-    } catch (error) {
-      console.log('still with error')
-      dispatch(
-        {
-          type: actions.CHANGED_NUMERAL_INPUT,
-          payload: {
-            input: e.target.value,
-            error: error.message
-          }
-        })
+  const transform = (input, isRoman) => {
+    const conversion = {
+      transformed: undefined,
+      error: undefined
     }
+
+    try {
+      const transformed = isRoman ? RomanNumerals.fromRoman(input) : RomanNumerals.toRoman(input)
+      conversion.transformed = transformed
+    } catch (e) {
+      conversion.error = e.message
+    }
+    return conversion
+  }
+
+  const handleInputChange = (e) => {
+    const { error, transformed } = transform(e.target.value, state.isRoman)
+    dispatch(
+      {
+        type: actions.CHANGED_NUMERAL_INPUT,
+        payload: {
+          input: e.target.value,
+          transformed,
+          error: error
+        }
+      })
   }
 
   const handleNumeralToggle = (e) => {
-    dispatch({ type: actions.TOGGLE })
+    const toTransform = state.transformed ? state.transformed : state.toTransform
+    const { error, transformed } = transform(state.transformed ? state.transformed : state.toTransform, e.target.checked)
+    dispatch(
+      {
+        type: actions.TOGGLE,
+        payload: {
+          input: toTransform,
+          transformed,
+          error: error
+        }
+      })
   }
 
   const currentTransformation = state.isRoman ? "roman to numerals." : "numerals to roman numbers."
@@ -48,7 +61,7 @@ const CommandCenter = ({ convert }) => {
       <div className={styles.CommandCenter}>
         <input className={styles.NumeralInput} type="text" placeholder='Please enter a value' value={state.toTransform} onChange={(e) => handleInputChange(e)}></input>
         <div className="onoffswitch">
-          <input type="checkbox" disabled={state.error} value={state.isRoman} onChange={(e) => handleNumeralToggle(e)} name="onoffswitch" className="onoffswitch-checkbox" id="myonoffswitch" tabIndex="0" />
+          <input type="checkbox" value={state.isRoman} onChange={(e) => handleNumeralToggle(e)} name="onoffswitch" className="onoffswitch-checkbox" id="myonoffswitch" tabIndex="0" />
           <label className="onoffswitch-label" htmlFor="myonoffswitch">
             <span className="onoffswitch-inner"></span>
             <span className="onoffswitch-switch"></span>

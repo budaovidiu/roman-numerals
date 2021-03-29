@@ -21,12 +21,11 @@ export const numeralsReducer = (state, action) => {
         error: action.payload.error,
       }
     case actions.TOGGLE:
-      // just swap to transform value to already transformed one
       const newState = {
-        ...state,
-        toTransform: state.transformed,
-        isRoman: !state.isRoman,
-        transformed: state.toTransform,
+        toTransform: action.payload.input,
+        transformed: action.payload.transformed,
+        error: action.payload.error,
+        isRoman: !state.isRoman
       }
       return newState
     default:
