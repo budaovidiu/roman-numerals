@@ -3,7 +3,7 @@ const RomanNumerals = (() => {
     let inputAsInt = parseInt(inputStr)
     let res = ''
     const numeralRegex = new RegExp('^[0-9]+$')
-    if (inputStr.length > 0 && !numeralRegex.test(inputStr)) throw new Error('Invalid input (should contain numbers from 0-9')
+    if (inputStr.length > 0 && !numeralRegex.test(inputStr)) throw new Error('Invalid input (should contain numbers from 0-9)')
 
     if (inputAsInt === 0) return res
 

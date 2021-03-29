@@ -6,7 +6,7 @@ describe('toRoman of RomanNumerals', () => {
   })
 
   test('with wrong string should throw error', () => {
-    expect(() => RomanNumerals.toRoman('a1')).toThrow('Invalid input (should contain numbers from 0-9')
+    expect(() => RomanNumerals.toRoman('a1')).toThrow('Invalid input (should contain numbers from 0-9)')
   })
 
   test('with 4 should return correct value', () => {
